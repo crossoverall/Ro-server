@@ -1,0 +1,147 @@
+//==============================================================\\
+//============= Script By.Jhondominic - GRTEAM =================\\
+//==============================================================\\
+//
+//===================== Script test by =========================
+//= eAthena SVN 15236 Trunk
+//===================== eAthena Script =========================
+//= HP & SP MALL
+//==================== Current Version: ========================
+//= 1.0
+//========================= Update =============================
+//= -
+//====================== Description: ==========================
+//= 1.0:
+//= สคริปนี้คือการเอา Cash ที่มีซื้อ SP และ HP มาปั้มโดยหลักการปั้มจะเหมือนน้ำในโอ่ง
+//= เมื่อเพิ่ม SP หรือ HP มันก็จะลบไปเรื่อยๆ จนหมด
+//ระบบนี้ผมได้เขียนไว้นานละเลยเอามาแจกให้ใช้กันฟรีๆ แล้วก็สคริปอะไรที่ผมเขียนไว้จะทยอยเอาออกมาแจกละ
+//
+//แต่ความมีน้ำใจของผมก็ต้องมีข้อจำกัด
+//
+//1. ห้ามนำไปจำหน่าย
+//2. เวลาโหลดของใครมาใช้โปรดให้เครดิตเขาบ้าง
+//
+//หลักการทำงานของสคริปนะครับ
+//
+//1. เราจะต้องใช้ Cash ในการซื้อ หน่วย HP และ หน่วย SP
+//2. เมื่อเราซื้อแล้วเวลากดใช้ หลักการทำงานมันจะเปรียบเสมือนโอ่ง เมื่อใช้ไปก็ลดลงเรื่อยๆ เช่นคุณซื้อ HP 500 หน่วยคุณปั้มไป 150 ก็จะเหลือให้ปั้มอีก 350 เมื่อปั้มจนหน่วย HP หมดก็จะหายไป เมื่อหายไปเราก็ต้องซื้อหน่วยเลือดใหม่
+//3. หลักการเพิ่ม HP และ SP จะต่างกันถ้าเป็นเพิ่ม HP จะ Random ค่า 3,000-4,000 ต่อการเพิ่มเลือด 1 ครั้ง ถ้าเป็น SP จะปั้มทีเดียวเต็ม
+//
+//ตั้งค่าก่อนใช้งาน
+//
+//1. ต้องเตรียม Item ที่คุณจะเอาไว้ปั้ม SP และ HP ไว้ 2 ชิ้น
+//2. HP นำโค้ดนี้ไปใส่ในช่อง {},{},{} ใน item_db { getitem <itemid>,1; callfunc "HP_MALL"; },{},{}
+//3. SP นำโค้ดนี้ไปใส่ในช่อง {},{},{} ใน item_db { getitem <itemid>,1; callfunc "SP_MALL"; },{},{}
+//
+//เป็นอันเสร็จเรียบร้อย
+//
+//** สคริปที่ผมแจกสามารถดัดแปลงและแก้ไข หรือดัดแปลงเป็นสไตล์ของคุณแล้วนำมาแจกได้ แต่สิ่งที่สำคัญที่สุดกรุณาอย่าลบเครดิตและนำไปจำหน่าย
+//==============================================================
+
+function	script	HP_MALL	{
+
+set @namenpc$,"[ ^0000FFHP MALL^000000 ]";
+
+	if ( $hppoint >= 1 ) {
+	if ( Hp == MaxHp ) { close; } 
+		set $PHP,rand(3000,4000);
+	if ( $HPM < $PHP ) {
+		heal $HPM,0;
+		dispbottom "เพิ่ม HP: "+$HPM+"";
+		set $HPM,$HPM-$HPM;
+		dispbottom "HP MALL เหลือ: "+$HPM+"";
+		delitem 501,1;
+		set $hppoint,0;
+	close;
+	}
+	if ( $PHP > MaxHP-Hp ) {
+		set $PHP,MaxHp-Hp;
+		heal $PHP,0;
+		set $HPM,$HPM-$PHP;
+		dispbottom "เพิ่ม HP: "+$PHP+"";
+		dispbottom "HP MALL เหลือ: "+$HPM+"";
+	close;
+	}
+		set $HPM,$HPM-$PHP;
+		heal $PHP,0;
+		dispbottom "เพิ่ม HP: "+$PHP+"";
+		dispbottom "HP MALL เหลือ: "+$HPM+"";
+		close;
+	}
+		mes @namenpc$;
+		mes "กรุณาใส่ Cash ที่ต้องการลงไป";
+		mes "ท่านจะได้รับ HP 1 : 70,000";
+		mes "ขณะนี้ท่านมี ^FF0000"+#CASHPOINTS+"^000000 Cash Points";
+		input $hppoint;
+	if ( $hppoint == 0 ) { close; }
+		set $SHP,$hppoint*70000;
+	next;
+	switch(prompt("จ่าย ^FF0000"+$hppoint+" Cash Points^000000 เพื่อซื้อ ^FF0000"+$SHP+"^000000 HP")) {
+		case 1:
+	if ( #CASHPOINTS < $hppoint ) {
+		dispbottom "ท่านมี Cash Points ไม่พอในการซื้อ HP MALL";
+		set $hppoint,0;
+		close;
+	}
+		atcommand "@cash -"+$hppoint+"";
+		set $HPM,$hppoint*70000;
+		dispbottom "Cash Points ของท่านเหลือ "+#CASHPOINTS+"";
+		dispbottom "การซื้อ HP เสร็จเรียบร้อย";
+	break;
+
+		case 255:
+		set $hppoint,0;
+	break;
+	}
+	close;
+}
+
+function	script	SP_MALL	{
+
+set @namenpc$,"[ ^0000FFSP MALL^000000 ]";
+
+	if ( $sppoint >= 1 ) {
+	if ( Sp == Maxsp ) { close; }
+	if ( $SPM < $PHP ) {
+		heal 0,$SPM;
+		dispbottom "เพิ่ม SP: "+$HPM+"";
+		set $SPM,$SPM-$SPM;
+		dispbottom "SP MALL เหลือ: "+$SPM+"";
+		delitem 501,1;
+		set $sppoint,0;
+	close;
+	}
+		set $PSP,MaxSP-SP;
+		heal 0,$PSP;
+		set $SPM,$SPM-$PSP;
+		dispbottom "เพิ่ม SP: "+$PSP+"";
+		dispbottom "SP MALL เหลือ: "+$SPM+"";
+	close;
+	}
+		mes @namenpc$;
+		mes "กรุณาใส่ Cash ที่ต้องการลงไป";
+		mes "ท่านจะได้รับ SP 1 : 70,000";
+		mes "ขณะนี้ท่านมี ^FF0000"+#CASHPOINTS+"^000000 Cash Points";
+		input $sppoint;
+	if ( $sppoint == 0 ) { close; }
+		set $SSP,$sppoint*70000;
+	next;
+	switch(prompt("จ่าย ^FF0000"+$sppoint+" Cash Points^000000 เพื่อซื้อ ^FF0000"+$SSP+"^000000 SP")) {
+		case 1:
+	if ( #CASHPOINTS < $sppoint ) {
+		dispbottom "ท่านมี Cash Points ไม่พอในการซื้อ SP MALL";
+		set $sppoint,0;
+		close;
+	}
+		atcommand "@cash -"+$sppoint+"";
+		set $SPM,$sppoint*70000;
+		dispbottom "Cash Points ของท่านเหลือ "+#CASHPOINTS+"";
+		dispbottom "การซื้อ SP เสร็จเรียบร้อย";
+	break;
+
+		case 255:
+		set $sppoint,0;
+	break;
+	}
+	close;
+}

@@ -1,0 +1,35 @@
+doubrius,145,46,6	script	Sailor#2izlude2	100,{
+	mes "[Sailor]";
+	mes "เห่ย !! ...ไงนักเดินทาง";
+	mes "เจ้ากำลังหาทางไปเมือง mellina ?";
+	mes "เจ้ามาถูกทางแล้ว";
+	mes "บางทีข้าอาจช่วยเจ้าได้";
+	next;
+	if (select("ไปสิ ข้าจะไป.:ไม่หล่ะข้าไม่เชื่อเจ้า") == 1) {
+		if(checkre(0))
+			warp "mellina",85,12;
+		else
+			warp "doubrius",149,27;
+		end;
+	}
+	close;
+}
+
+///////////////////////
+
+mellina,83,25,7	script	Sailor#2izlude3	100,{
+	mes "[Sailor]";
+	mes "เห่ย !! ...ไงนักเดินทาง";
+	mes "เจ้ากำลังหาทางกลับเมือง doubrius ?";
+	mes "ข้ากำลังรออยู่เลย";
+	mes "บางทีข้าอาจช่วยเจ้าได้";
+	next;
+	if (select("ไปสิ ข้าจะไป.:ไม่หล่ะข้าไม่เชื่อเจ้า") == 1) {
+		if(checkre(0))
+			warp "doubrius",149,27;
+		else
+			warp "mellina",85,12;
+		end;
+	}
+	close;
+}

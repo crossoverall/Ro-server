@@ -1,0 +1,3 @@
+new_1-1,0,0,0,0	monster	Poring	1002,200,0,0,0
+new_1-1,0,0,0,0	monster	Poporing	1031,200,0,0,0
+new_1-1,0,0,0,0	monster	Poring	1113,200,0,0,0

@@ -1,0 +1,30 @@
+//chillchill
+
+neko_isle,0,0,0,0	monster		3000,10,0,0,0
+neko_isle,0,0,0,0	monster		3001,5,0,0,0
+neko_isle,0,0,0,0	monster		3002,5,0,0,0
+neko_isle,0,0,0,0	monster		3003,5,0,0,0
+neko_isle,0,0,0,0	monster		3004,10,0,0,0
+neko_isle,0,0,0,0	monster		3005,10,0,0,0
+neko_isle,0,0,0,0	monster		3006,10,0,0,0
+neko_isle,0,0,0,0	monster		3007,5,0,0,0
+neko_isle,0,0,0,0	monster		3008,5,0,0,0
+neko_isle,0,0,0,0	monster		3009,5,0,0,0
+neko_isle,0,0,0,0	monster		3010,10,0,0,0
+neko_isle,0,0,0,0	monster		3011,10,0,0,0
+neko_isle,0,0,0,0	monster		3012,10,0,0,0
+neko_isle,0,0,0,0	monster		3013,5,0,0,0
+neko_isle,0,0,0,0	monster		3014,5,0,0,0
+neko_isle,0,0,0,0	monster		3015,5,0,0,0
+neko_isle,0,0,0,0	monster		3016,10,0,0,0
+neko_isle,0,0,0,0	monster		3017,10,0,0,0
+neko_isle,0,0,0,0	monster		3018,10,0,0,0
+neko_isle,0,0,0,0	monster		3019,5,0,0,0
+neko_isle,0,0,0,0	monster		3020,5,0,0,0
+neko_isle,0,0,0,0	monster		3021,5,0,0,0
+neko_isle,0,0,0,0	monster		3022,10,0,0,0
+neko_isle,0,0,0,0	monster		3023,10,0,0,0
+neko_isle,0,0,0,0	monster		3024,10,0,0,0
+neko_isle,0,0,0,0	monster		3026,10,0,0,0
+neko_isle,0,0,0,0	monster		3027,10,0,0,0
+neko_isle,0,0,0,0	monster		3028,1,0,0,0

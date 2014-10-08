@@ -1,0 +1,28 @@
+livion,151,129,5	script	ExchangeJuti::Exchange	845,{
+mes "[ExchangeJuti]";
+mes "ที่นี่ ให้ คุณ ได้ เพิ่ม Cash ด้วยตัวของคุณเอง";
+mes "TCG Card 50 ใบต่อ 50 พอยท์";
+next;
+menu "แลกเลย",L_Adpoint,"ยกเลิก",-;
+close;
+
+L_Adpoint:
+If(countitem(7227)<50) goto i_no;
+delitem 7227,50;
+dispbottom "Points ได้ถูกเพิ่มให้เรียบร้อยแล้ว กรุณาเช็คที่ตู้โค้กได้ทันที";
+set @RID, getcharid(3,.@dname$);
+attachrid(@RID);
+//charCommand "#cash 50 +strcharinfo(0)";
+set #CASHPOINTS ,#CASHPOINTS+50;
+//set #Cash,#Cash+.@cpoint;
+close;
+
+i_no:
+mes "[ExchangeJuti]";
+mes "เจ้าไม่มี TCG Card";
+close;
+
+OnInit:
+waitingroom "TCG แลก Point",0;
+end;
+}

@@ -1,0 +1,502 @@
+//===================================================================
+// NPC: เป่ายิ้งฉุบ v.1.0
+// Design By: MegaboyTop 
+// Contact: www.facebook.com/iberryro
+//===================================================================
+//= การพนันในเกมส์เล่นเพื่อความสนุกอย่าไปเล่นพนันกับในชีวิตจริงนะครับ
+//=============================================
+
+livion,236,95,8	script	ไฮโล::Highlow0	997,{
+mes "[xzard]";
+mes "สวัสดี ท่าน! ต้องการที่จะเล่น Highlow หรือปล่าว?";
+menu "ฉันต้องการเล่น",Play,"ถามกติกา",howto,"ไม่ล่ะ ขอบคุณ",bye;
+
+howto:
+mes "[xzard]";
+mes "เลือกจำนวนเงินที่ท่านจะแทง จากนั้นก็เลือกว่าท่านจะแทงอะไร  มี สูง ต่ำ ดำเตี้ย อ่ะไม่ใช่";
+mes "สูง ต่ำ เลขคู่ เลขคี่ และท่านสามารถเลือกหมายเลขที่ท่านชอบได้";
+mes "กรณีพิเศษ ถ้าท่านเลือกเลขแบบเจาะจง จำนวนเงินที่ได้ก็จะสูงกว่าเดิม";
+mes "ถ้าท่านถูกก็รับไปเลย ไม่มีข้อแม้";
+mes "มาดูราคากันดีกว่า";
+next;
+mes "[xzard]";
+mes "เฉพาะแทง สูง ต่ำ เลขคู่ และเลขคี่";
+mes "แทง 10 ได้ 30";
+mes "แทง 100 ได้ 300";
+mes "แทง 200 ได้ 500";
+mes "แทง 500 ได้ 1500";
+next;
+mes "[xzard]";
+mes "เฉพาะแทงเลขแบบเจาะจงเท่านั้น";
+mes "แทง 10 ได้ 300";
+mes "แทง 100 ได้ 1000";
+mes "แทง 200 ได้ 5000";
+mes "แทง 500 ได้ 10000";
+next;
+mes "[xzard]";
+mes "จะเล่นไหมละท่าน";
+next;
+menu "เล่น",Play, "ไม่ล่ะ ขอบคุณ",bye;
+
+
+Play:
+set @bet, 0;
+set @high, 0;
+set @low, 0;
+set @tw, 0;
+set @al, 0;
+set @num3, 0;
+set @num4, 0;
+set @num5, 0;
+set @num6, 0;
+set @num7, 0;
+set @num8, 0;
+set @num9, 0;
+set @num10, 0;
+set @num11, 0;
+set @num12, 0;
+set @num13, 0;
+set @num14, 0;
+set @num15, 0;
+set @num16, 0;
+set @num17, 0;
+set @num18, 0; 
+mes "[xzard]";
+mes "กรุณาใส่จำนวนเงิน";
+next;
+menu "10z",M10, "100z",M100, "200z",M200, "500z",M500, "ไม่เอาล่ะ เลิกๆ!!",bye;
+M10:
+  if(Zeny < 10) goto Notmoney;
+  set @bet, 10;
+  set zeny,zeny -10;
+  goto Conty;
+M100:
+  if(Zeny < 100) goto Notmoney;
+  set @bet, 100;
+  set zeny,zeny -100;
+  goto Conty;
+M200:
+  if(Zeny < 200) goto Notmoney;
+  set @bet, 200;
+  set zeny,zeny -200;
+  goto Conty;
+M500:
+  if(Zeny < 500) goto Notmoney;
+  set @bet, 500;
+  set zeny,zeny -500;
+  goto Conty;
+
+Notmoney:
+mes "[xzard]";
+mes "ผมเสียใจด้วยท่าน  ท่านไม่มีเงินที่จะเล่นกับเรานะท่าน!";
+close;
+
+Conty:
+mes "[xzard]";
+mes "เลือกเลยท่าน";
+next;
+menu "สูง",high,"ต่ำ",low,"เลขคู่",twi,"เลขคี่",alo,"เจาะจงหมายเลข",shnum;
+
+shnum:
+menu "3",num3,"4",num4,"5",num5,"6",num6,"7",num7,"8",num8,"9",num9,"10",num10,"11",num11,"12",num12,"13",num13,"14",num14,"15",num15,"16",num16,"17",num17,"18",num18;
+
+high:
+set @high, 1;
+goto start;
+
+low:
+set @low, 2;
+goto start;
+
+twi:
+set @tw, 4;
+goto start;
+
+alo:
+set @al, 5;
+goto start;
+
+num3:
+set @num3, 6;
+goto start;
+
+num4:
+set @num4, 7;
+goto start;
+
+num5:
+set @num5, 8;
+goto start;
+
+num6:
+set @num6, 9;
+goto start;
+
+num7:
+set @num7, 10;
+goto start;
+
+num8:
+set @num8, 11;
+goto start;
+
+num9:
+set @num9, 12;
+goto start;
+
+num10:
+set @num10, 13;
+goto start;
+
+num11:
+set @num11, 14;
+goto start;
+
+num12:
+set @num12, 15;
+goto start;
+
+num13:
+set @num13, 16;
+goto start;
+
+num14:
+set @num14, 17;
+goto start;
+
+num15:
+set @num15, 18;
+goto start;
+
+num16:
+set @num16, 19;
+goto start;
+
+num17:
+set @num17, 20;
+goto start;
+
+num18:
+set @num18, 21;
+goto start;
+
+start:
+mes "[xzard]";
+mes "เปิดละนะ";
+next;
+set @cube,rand(3,18);
+if ( @cube == 3 ) goto ber3;
+if ( @cube == 4 ) goto ber4;
+if ( @cube == 5 ) goto ber5;
+if ( @cube == 6 ) goto ber6;
+if ( @cube == 7 ) goto ber7;
+if ( @cube == 8 ) goto ber8;
+if ( @cube == 9 ) goto ber9;
+if ( @cube == 10 ) goto ber10;
+if ( @cube == 11 ) goto ber11;
+if ( @cube == 12 ) goto ber12;
+if ( @cube == 13 ) goto ber13;
+if ( @cube == 14 ) goto ber14;
+if ( @cube == 15 ) goto ber15;
+if ( @cube == 16 ) goto ber16;
+if ( @cube == 17 ) goto ber17;
+if ( @cube == 18 ) goto ber18;
+
+ber3:
+mes "[xzard]";
+mes "3 ต่ำครับ เลขคี่";
+next;
+if (@low == 2) goto win;
+if (@al == 5) goto win;
+if (@num3 == 6) goto win2;
+mes "[xzard]";
+mes "เสียใจด้วยท่าน";
+next;
+goto Play;
+
+ber4:
+mes "[xzard]";
+mes "4 ต่ำครับ เลขคู่";
+next;
+if (@low == 2) goto win;
+if (@tw == 4) goto win;
+if (@num4 == 7) goto win2;
+mes "[xzard]";
+mes "เสียใจด้วยท่าน";
+next;
+goto Play;
+
+ber5:
+mes "[xzard]";
+mes "5 ต่ำครับ เลขคี่";
+next;
+if (@low == 2) goto win;
+if (@al == 5) goto win;
+if (@num5 == 8) goto win2;
+mes "[xzard]";
+mes "เสียใจด้วยท่าน";
+next;
+goto Play;
+
+ber6:
+mes "[xzard]";
+mes "6 ต่ำครับ เลขคู่";
+next;
+if (@low == 2) goto win;
+if (@tw == 4) goto win;
+if (@num6 == 9) goto win2;
+mes "[xzard]";
+mes "เสียใจด้วยท่าน";
+next;
+goto Play;
+
+ber7:
+mes "[xzard]";
+mes "7 ต่ำครับ เลขคี่";
+next;
+if (@low == 2) goto win;
+if (@al == 5) goto win;
+if (@num7 == 10) goto win2;
+mes "[xzard]";
+mes "เสียใจด้วยท่าน";
+next;
+goto Play;
+
+ber8:
+mes "[xzard]";
+mes "8 ต่ำครับ เลขคู่";
+next;
+if (@low == 2) goto win;
+if (@tw == 4) goto win;
+if (@num8 == 11) goto win2;
+mes "[xzard]";
+mes "เสียใจด้วยท่าน";
+next;
+goto Play;
+
+ber9:
+mes "[xzard]";
+mes "9 ต่ำครับ เลขคี่";
+next;
+if (@low == 2) goto win;
+if (@al == 5) goto win;
+if (@num9 == 12) goto win2;
+mes "[xzard]";
+mes "เสียใจด้วยท่าน";
+next;
+goto Play;
+
+ber10:
+mes "[xzard]";
+mes "10 ต่ำครับ เลขคู่";
+next;
+if (@low == 2) goto win;
+if (@tw == 4) goto win;
+if (@num10 == 13) goto win2;
+mes "[xzard]";
+mes "เสียใจด้วยท่าน";
+next;
+goto Play;
+
+ber11:
+mes "[xzard]";
+mes "11 สูงครับ เลขคี่";
+next;
+if (@high == 1) goto win;
+if (@al == 5) goto win;
+if (@num11 == 14) goto win2;
+mes "[xzard]";
+mes "เสียใจด้วยท่าน";
+next;
+goto Play;
+
+ber12:
+mes "[xzard]";
+mes "12 สูงครับ เลขคู่";
+next;
+if (@high == 1) goto win;
+if (@tw == 4) goto win;
+if (@num12 == 15) goto win2;
+mes "[xzard]";
+mes "เสียใจด้วยท่าน";
+next;
+goto Play;
+
+ber13:
+mes "[xzard]";
+mes "13 สูงครับ เลขคี่";
+next;
+if (@high == 1) goto win;
+if (@al == 5) goto win;
+if (@num13 == 16) goto win2;
+mes "[xzard]";
+mes "เสียใจด้วยท่าน";
+next;
+goto Play;
+
+ber14:
+mes "[xzard]";
+mes "14 สูงครับ เลขคู่";
+next;
+if (@high == 1) goto win;
+if (@tw == 4) goto win;
+if (@num14 == 17) goto win2;
+mes "[xzard]";
+mes "เสียใจด้วยท่าน";
+next;
+goto Play;
+
+ber15:
+mes "[xzard]";
+mes "15 สูงครับ เลขคี่";
+next;
+if (@high == 1) goto win;
+if (@al == 5) goto win;
+if (@num15 == 18) goto win2;
+mes "[xzard]";
+mes "เสียใจด้วยท่าน";
+next;
+goto Play;
+
+ber16:
+mes "[xzard]";
+mes "16 สูงครับ เลขคู่";
+next;
+if (@high == 1) goto win;
+if (@tw == 4) goto win;
+if (@num16 == 19) goto win2;
+mes "[xzard]";
+mes "เสียใจด้วยท่าน";
+next;
+goto Play;
+
+ber17:
+mes "[xzard]";
+mes "17 สูงครับ เลขคี่";
+next;
+if (@high == 1) goto win;
+if (@al == 5) goto win;
+if (@num17 == 20) goto win2;
+mes "[xzard]";
+mes "เสียใจด้วยท่าน";
+next;
+goto Play;
+
+ber18:
+mes "[xzard]";
+mes "18 สูงครับ เลขคู่";
+next;
+if (@high == 1) goto win;
+if (@tw == 4) goto win;
+if (@num18 == 21) goto win2;
+mes "[xzard]";
+mes "เสียใจด้วยท่าน";
+next;
+goto Play;
+
+win:
+mes "[xzard]";
+mes "ท่านถูก!! ยินดีด้วย";
+next;
+if (@bet == 10) set zeny,zeny +30;
+if (@bet == 100) set zeny,zeny +300;
+if (@bet == 200) set zeny,zeny +500;
+if (@bet == 500) set zeny,zeny +1500;
+mes "[xzard]";
+mes "รับไปตามที่ท่านแทง";
+mes "ต่อเลยท่าน!";
+next;
+goto Play;
+
+win2:
+mes "[xzard]";
+mes "ท่านแม่นอะไรอย่างนี้";
+mes "แทงเลขถูกคูณเน้นๆเลยครับท่าน";
+next;
+if (@bet == 10) set zeny,zeny +300;
+if (@bet == 100) set zeny,zeny +1000;
+if (@bet == 200) set zeny,zeny +5000;
+if (@bet == 500) set zeny,zeny +10000;
+mes "[xzard]";
+mes "รับไปเลยยท่าน";
+mes "ต่อเลยท่าน!";
+next;
+goto Play;
+
+bye:
+mes "[xzard]";
+mes "ถ้าคุณอยากสนุกก็กลับมาได้ทุกเวลานะท่าน";
+close;
+//OnInit: 
+//waitingroom "~*Hilogเชิญเลยจ้ะ*~",0; 
+//end; 
+}
+
+// ====== npc เพิ่มเติม ====== //
+quiz_02.gat,309,267,4	script	ผู้ดูแลบ่อน	733,{
+mes "[ผู้ดูแลบ่อน]";
+mes "ว่าไง! ฉันเป็น Guard ดูแลที่นี่ คอยดูแลพวกที่จะทำอะไรโง่ๆ!";
+close;
+}
+
+quiz_02.gat,311,267,4	script	จอมยุทธ	97,{ 
+mes "[จอมยุทธ]";
+mes "อาาา!!!";
+mes "ตั้งแต่มานี่ ฉันหมดไปตั้งเยอะแล้ว คิดผิดจริงๆที่มาที่นี่!";
+mes "..........";
+mes ".....";
+next;
+mes "[จอมยุทธ]";
+mes "อาาา .... เงินของฉันนนน! อาาาาา .....";
+close;
+}
+
+quiz_02.gat,313,267,4	script	ประชาชน	732,{
+mes "[ประชาชน]";
+mes "เฮ้ มันไม่ใช่วันที่ดีเลย!";
+next;
+mes "[ประชาชน]";
+mes "อืม, วันนี้ เป็นวันเลวร้ายสำหรับฉัน ... ฉันเสียไปเป็นล้านเลย!";
+next;
+mes "[ประชาชน]";
+mes "แต่ว่า ยังไงก็ขอให้คุณโชคดี!";
+close;
+}
+
+quiz_02.gat,0,0,0	script	comotalk	-1,{
+OnTimer20000:
+Lcomotalk:
+    set $comotalk,rand(6);
+if($comotalk == 0) goto Lcomodo0;
+if($comotalk == 1) goto Lcomodo1;
+if($comotalk == 2) goto Lcomodo2;
+if($comotalk == 3) goto Lcomodo3;
+if($comotalk == 4) goto Lcomodo4;
+if($comotalk == 5) goto Lcomodo5;
+goto Lcomotalk;
+Lcomodo0:
+mapannounce "quiz_02.gat","ยินดีต้อนรับคุณเข้าสู่ เมืองแห่งเกมส์การพนัน !!",0;
+    setnpctimer 0;
+    end;
+Lcomodo1:
+mapannounce "quiz_02.gat","ที่เมืองนี้มีเกมส์การพนันให้คุณได้สนุกสนาน",0;
+    setnpctimer 0;
+    end;
+Lcomodo2:
+    setnpctimer 0;
+    end;
+Lcomodo3:
+mapannounce "quiz_02.gat","เมืองแห่งนี้ไม่ต้องกลัวว่ามีตำรวจน่ะ โหะๆ !!",0;
+    setnpctimer 0;
+    end;
+Lcomodo4:
+    setnpctimer 0;
+    end;
+Lcomodo5:
+mapannounce "quiz_02.gat","ขอให้คุณมีความสุขเมื่อคุณอยู่ที่เมืองนี้",0;
+    setnpctimer 0;
+    end;
+OnInit:
+     initnpctimer;
+end;
+}

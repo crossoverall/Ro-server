@@ -1,0 +1,208 @@
+//===================================================================
+// NPC: เป่ายิ้งฉุบ v.1.0
+// Design By: MegaboyTop
+// Contact: www.facebook.com/iberryro
+//===================================================================
+
+alberta,102,235,4	script	เป่ายิ้งฉุบ	702,{
+mes "[เป่ายิ้งฉุบ]";
+mes "มาเลยมา สบายอยู่แล้ว";
+mes "พนันกันมาเลยเท่าไหร่ว่ามาชนะได้ 2 เท่า";
+next;
+if(zeny <= 0 ) goto L_Not_Zeny;
+mes "[เป่ายิ้งฉุบ]";
+mes "พนันสูงสด 1M หรือจะเอามากกว่านั้นก็ตามใจ";
+menu "เอาตามที่ข้าต้องการแต่ไม่เกิน 1M",L_Start_10M,"เอามากกว่านั้น",L_Start_Other;
+
+L_Start_10M:
+input @Zeny_This_Game;
+mes "จำนวนเงิน เท่ากับ " + @Zeny_This_Game + " ตกลงได้";
+next;
+set @zeny,@Zeny_This_Game * 2;
+if(@zeny > zeny ) goto L_Not_Zeny2;
+mes "เริ่มล่ะนะ";
+next;
+menu "มาเลย!",L_Start,"ไม่ดีกว่าไร้สาระ",L_No;
+
+L_Start_Other:
+mes "[เป่ายิ้งฉุบ]";
+mes "เอาเท่าไหร่ดีล่ะ";
+next;
+menu "70K",L_20M,"400K",L_50M,"800K",L_100M,"สุดๆไปเลย 1M",L_500M;
+
+L_20M:
+set @zeny,70000*2;
+goto L_Start_1;
+
+L_50M:
+set @zeny,400000*2;
+goto L_Start_1;
+
+L_100M:
+set @zeny,800000*2;
+goto L_Start_1;
+
+L_500M:
+set @zeny,1000000*2;
+goto L_Start_1;
+
+L_Start_1:
+if(@zeny > zeny ) goto L_Not_Zeny2;
+mes "เริ่มล่ะนะ";
+next;
+menu "มาเลย!",L_Start,"ไม่ดีกว่าไร้สาระ",Wg_No;
+
+L_Start:
+Set @game_1,rand(3);
+mes "กรุณาเลือก";
+menu "ค้อน",L_H,"กรรไกร",L_S,"กระดาษ",L_P;
+
+L_H:
+if(@game_1 == 0) goto L_game_2_1;
+if(@game_1 == 1) goto L_game_2_2;
+if(@game_1 == 2) goto L_game_2_3;
+
+L_S:
+if(@game_1 == 0) goto L_game_3_1;
+if(@game_1 == 1) goto L_game_3_2;
+if(@game_1 == 2) goto L_game_3_3;
+
+L_P:
+if(@game_1 == 0) goto L_game_4_1;
+if(@game_1 == 1) goto L_game_4_2;
+if(@game_1 == 2) goto L_game_4_3;
+
+L_game_2_1:
+mes "ย้ากกกกกกก!!!!!!!";
+mes "เป่า!!! ยิ้ง!!!!!! ฉุบ!!!!!!!!!!!!!!!";
+next;
+mes "NPC test : ค้อน!";
+mes "VS!";
+mes "Played" + strcharinfo(0) + " : ค้อน!";
+next;
+goto L_Again;
+
+L_game_2_2:
+mes "ย้ากกกกกกก!!!!!!!";
+mes "เป่า!!! ยิ้ง!!!!!! ฉุบ!!!!!!!!!!!!!!!";
+next;
+mes "NPC test : กรรไกร!";
+mes "VS";
+mes "Played" + strcharinfo(0) + " : ค้อน!";
+next;
+goto L_You_Win;
+
+L_game_2_3:
+mes "ย้ากกกกกกก!!!!!!!";
+mes "เป่า!!! ยิ้ง!!!!!! ฉุบ!!!!!!!!!!!!!!!";
+next;
+mes "NPC test : กระดาษ!";
+mes "VS";
+mes "Played" + strcharinfo(0) + " : ค้อน!";
+next;
+goto L_You_Lose;
+
+L_game_3_1:
+mes "ย้ากกกกกกก!!!!!!!";
+mes "เป่า!!! ยิ้ง!!!!!! ฉุบ!!!!!!!!!!!!!!!";
+next;
+mes "NPC test : ค้อน!";
+mes "VS!";
+mes "Played" + strcharinfo(0) + " : กรรไกร!";
+next;
+goto L_You_Lose;
+
+L_game_3_2:
+mes "ย้ากกกกกกก!!!!!!!";
+mes "เป่า!!! ยิ้ง!!!!!! ฉุบ!!!!!!!!!!!!!!!";
+next;
+mes "NPC test : กรรไกร!";
+mes "VS";
+mes "Played" + strcharinfo(0) + " : กรรไกร!";
+next;
+goto L_Again;
+
+L_game_3_3:
+mes "ย้ากกกกกกก!!!!!!!";
+mes "เป่า!!! ยิ้ง!!!!!! ฉุบ!!!!!!!!!!!!!!!";
+next;
+mes "NPC test : กระดาษ!";
+mes "VS";
+mes "Played" + strcharinfo(0) + " : กรรไกร!";
+next;
+goto L_You_Win;
+
+L_game_4_1:
+mes "ย้ากกกกกกก!!!!!!!";
+mes "เป่า!!! ยิ้ง!!!!!! ฉุบ!!!!!!!!!!!!!!!";
+next;
+mes "NPC test : ค้อน!";
+mes "VS!";
+mes "Played" + strcharinfo(0) + " : กระดาษ!";
+next;
+goto L_You_Win;
+
+L_game_4_2:
+mes "ย้ากกกกกกก!!!!!!!";
+mes "เป่า!!! ยิ้ง!!!!!! ฉุบ!!!!!!!!!!!!!!!";
+next;
+mes "NPC test : กรรไกร!";
+mes "VS";
+mes "Played" + strcharinfo(0) + " : กระดาษ!";
+next;
+goto L_You_Lose;
+
+L_game_4_3:
+mes "ย้ากกกกกกก!!!!!!!";
+mes "เป่า!!! ยิ้ง!!!!!! ฉุบ!!!!!!!!!!!!!!!";
+next;
+mes "NPC test : กระดาษ!";
+mes "VS";
+mes "Played" + strcharinfo(0) + " : กระดาษ!";
+next;
+goto L_Again;
+
+L_Again:
+mes "[เป่ายิ้งฉุบ]";
+mes "เสมอ! เริ่มใหม่";
+next;
+goto L_Start;
+
+L_You_Win:
+mes "[เป่ายิ้งฉุบ]";
+mes "โอ้!!!! ข้าแพ้";
+next;
+set zeny,zeny + @zeny;
+mes "[เป่ายิ้งฉุบ]";
+mes "แล้วมาเจอกันอีกล่ะ";
+close;
+
+L_You_Lose:
+mes "[เป่ายิ้งฉุบ]";
+mes "Hahahahaha คุณแพ้แล้วคุณต้องทำตามที่ตกลงไว้";
+next;
+set zeny,zeny - @zeny;
+mes "แล้วมาเจอกันอีกล่ะ";
+close;
+
+L_Not_Zeny:
+mes "[เป่ายิ้งฉุบ]";
+mes "แล้วไหนเงินของคุณล่ะที่จะลง";
+close;
+
+L_Not_Zeny2:
+mes "[เป่ายิ้งฉุบ]";
+mes "พนันเกินตัวไปรึป่าว";
+close;
+
+L_No:
+mes "[เป่ายิ้งฉุบ]";
+mes "ไม่ลองซะหน่อยรึ";
+close;
+
+Wg_No:
+mes "[เป่ายิ้งฉุบ]";
+mes "งั้นไว้เจอกันใหม่";
+close;
+end; 
+} 

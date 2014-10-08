@@ -1,0 +1,168 @@
+//===================================================================
+// NPC: บริการ Homunculus
+// Design By: MegaboyTop
+// Contact: www.facebook.com/iberryro
+//===================================================================
+
+livion,168,128,4	script	Homunculus	881,{
+mes "[ Homunculus ]";
+mes "ขอต้อนรับสู่บริการ Homunculus";
+next;
+menu
+"• ซัพพอท Skill Homunculus",h1,
+"• เพิ่มเลเวล Homunculus",h2,
+"• เพิ่มความสนิทสนม Homunculus",h3,
+"• พัฒนาร่าง Homunculus",h4,
+"• อาหาร Homunculus",h5,
+"• ขอรับตัวอ่อน Homunculus",h6,
+"Exit",Cancel;
+
+
+h1:
+mes"[ Homunculus ]";
+mes"รอก่อนนะ";
+mes"ข้ากำลังตรวจสอบอาชีพของเจ้าอยู่";
+next;
+if(BaseJob != Job_Alchem) goto noalchem;
+if(JobLevel<40) goto nojob;
+mes"[ Homunculus ]";
+mes"เจ้าได้รับซัพพอทสกิลของ Homunculus เรียบร้อยแล้ว";
+getitem 7142,1;
+skill 238,1,0;
+skill 239,1,0;
+skill 240,1,0;
+skill 241,1,0;
+skill 242,1,0;
+skill 245,1,0;
+skill 246,1,0;
+close;
+
+
+h2:
+mes"[ Homunculus ]";
+mes"รอก่อนนะ";
+mes"ข้ากำลังตรวจสอบอาชีพของเจ้าอยู่";
+next;
+if(BaseJob != Job_Alchem) goto noalchem;
+if(JobLevel<40) goto nojob;
+mes"[ Homunculus ]";
+mes"การเพิ่มเลเวลให้กับ Homunculus ; สำเร็จเรียบร้อย";
+atcommand strcharinfo(0)+ "@homlvup 99";
+close;
+
+
+h3:
+mes"[ Homunculus ]";
+mes"รอก่อนนะ";
+mes"ข้ากำลังตรวจสอบอาชีพของเจ้าอยู่";
+next;
+if(BaseJob != Job_Alchem) goto noalchem;
+if(JobLevel<40) goto nojob;
+mes"[ Homunculus ]";
+mes"ความสนิทสนมของ Homunculus เพิ่มขึ้น 100%";
+atcommand strcharinfo(0)+ "@homfriendly 1000";
+close;
+
+
+
+h4:
+mes"[ Homunculus ]";
+mes"รอก่อนนะ";
+mes"ข้ากำลังตรวจสอบอาชีพของเจ้าอยู่";
+next;
+if(BaseJob != Job_Alchem) goto noalchem;
+if(JobLevel<40) goto nojob;
+mes"[ Homunculus ]";
+mes"การพัฒนาร่าง Homunculus ประสบความสำเร็จเรียบร้อย";
+atcommand strcharinfo(0)+ "@homevolution";
+close;
+
+
+h5:
+mes"[ Homunculus ]";
+mes"ขอบคุณ";
+close2;
+callshop "shophom",1;
+close;
+
+h6:
+if (Class == 18) goto L_go;
+if (Class == 4019) goto L_go;
+if (Class == 4071) goto L_go;
+if (Class == 4078) goto L_go;
+if (Class == 4041) goto L_go;
+if (Class == 4107) goto L_go;
+mes "[^777777Homunculus^000000]";
+mes "ขออภัย";
+mes "ท่านไม่ใช้อาชีพ ^FF8000Alchemist^000000";
+mes "ท่านไม่ใช้อาชีพ ^FF0000BioChemist^000000";
+close;
+
+
+L_go:
+mes "[^777777Homunculus^000000]";
+mes "สวัสดีท่าน "+ strcharinfo(0) +" ";
+mes "~~ ท่านต้องการมี Homunculus บ้างรึเปล่า";
+next;
+menu "แน่นอน",L_yes,"ไม่หละ",L_no;
+
+L_yes:
+mes"[ Homunculus ]";
+mes "มาดูสิ่งที่ข้าต้องการกัน";
+mes "^FF00001.Seed Of Life^000000";
+mes "^FF00002.200,000 Zeny^000000";
+mes "ถ้าเจ้าไม่มีสามารถซื้อร้านข้างๆข้าได้";
+mes "ข้าจะถามเข้าอีกรอบ ว่าเจ้าต้องการจะทำไหม";
+next;
+menu "แน่นอนอยู่แล้ว",-,"ข้าเปลี่ยนใจ",L_no;
+if (countitem(7140) == 0 ) goto Ldont;
+delitem 7140,1;
+set Zeny, Zeny-200000;
+next;
+mes "กรุณารอสักครู่ ....";
+mes "[^777777Homunculus^000000]";
+mes "ฮ่าๆ เสร็จแล้ว !!!";
+mes "ข้าจะให้ Embryo เจ้าด้วย"; 
+mes "ขอให้โชคดีนะ";
+getitem 7142,1;
+skill 238,1,0;
+skill 239,1,0;
+skill 240,1,0;
+skill 241,1,0;
+skill 242,1,0;
+skill 243,1,0;
+skill 246,1,0;
+skill 247,1,0;
+close;
+
+
+Ldont:
+mes "[^777777Homunculus^000000]";
+mes "เจ้ามีของที่ข้าต้องการไม่ครบนี่?";
+close;
+
+L_no:
+close;
+
+noalchem:
+mes"[ Homunculus ]";
+mes"เจ้าไม่ใช่อาชีพ Biochemist หรือ Alchemist";
+close;
+
+
+nojob:
+mes"[ Homunculus ]";
+mes"เสียใจด้วย; เลเวลของเจ้าต่ำกว่า 40";
+mes"ข้าไม่สามารถให้เจ้าเรียนรู้สกิลซัพพอทของ Homunculus ได้";
+close;
+
+
+Cancel:
+mes"[ Homunculus ]";
+mes"แล้วเจอกันใหม่ โอกาสหน้า";
+close;
+end;
+}
+
+//======================== Etc. Shop ===============================
+-	shop	shophom	90,537:1200,911:150,910:70,912:6500,7224:200000

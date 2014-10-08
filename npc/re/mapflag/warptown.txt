@@ -1,0 +1,4 @@
+livion,293,108,0	warp	Hyrule	1,1,Hyrule,25,194
+
+
+Hyrule,19,195,0 	warp	livion	1,1,livion,288,108

@@ -1,0 +1,49 @@
+//Receptionist
+new_1-1,62,107,6	script	รถแดงเข้าเมืองมั้ยสัสส	965,{
+	if(Class != Job_Novice || Upper) goto L_Fail;
+	if(TrainDes >= 1) goto L_Fail;
+	mes "[ลุงรถแดง]";
+	mes "เห่ย...!! นี่เจ้าคนนั้นนิ";
+	mes "ว้าววววว !!! เจ้าดูดีขึ้นนิ";
+	next;
+	mes "[ลุงรถแดง]";
+	mes "เจ้าพร้อมที่จะไปสู่โลกภายนออก";
+	mes "แล้วหรือยัง ?";
+		L_loop:
+	next;
+		menu "พร้อมแล้ว",vix,"ยังอยากอยู่ต่อ",vic;
+		vix:
+		mes "[ลุงรถแดง]";
+		mes "โอเคข้าจะส่งเจ้าออกไป";
+		next;
+		mes "[ลุงรถแดง]";
+		mes "ดังนั้นข้าจึงขอมอบเงินอีก 100,000 Zeny เอาไว้ให้เจ้าใช้การเดินทาง";
+		next;
+		mes "[ลุงรถแดง]";
+		mes "เอาละ อย่ามัวเสียเวลาเลย ข้าจะส่งเจ้าไปยัง";
+		mes "เมืองหลวงของพวกข้า livion town";
+		close2;
+		set TrainDes,1;
+		set Zeny,Zeny+100000;
+		savepoint "livion",186,154;
+		warp "livion",186,154;
+		end;	
+vic:	
+		mes "[ลุงรถแดง]";
+		mes "ข้าเข้าใจแล้ว";
+		mes "ข้าก็ว่าเจ้าควรอยู่ที่นี้";
+		mes "ถ้าเจ้าพร้อมเมื่อไหร่";
+		mes "ให้เจ้ากลับมาหาข้า";
+		close2;
+		set TrainDes,0;
+		savepoint "new_1-1",53,111;
+		warp "new_1-1",53,111;
+		end;
+L_Fail:
+	mes "[ลุงรถแดง]";
+	mes "คุณไม่ควรมาอยู่ที่นี่";
+	close2;
+	savepoint "livion",186,154;
+	warp "livion",186,154;
+	end;
+}

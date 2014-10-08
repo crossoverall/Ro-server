@@ -1,0 +1,127 @@
+//===================================================================
+// NPC : แจกเซ็ตการ์ดแต่ละอาชีพ
+// Design By: MegaboyTop
+// Contact: www.facebook.com/iberryro
+//===================================================================
+
+morocc,113,92,4	script	Card Set	412,{
+mes "^FF0000[ Card Set NPC ]^000000";
+mes "โปรดเลือกการ์ดเช็ตตามสายอาชีพที่คุณเล่นอยู่";
+mes "เลือกหัวข้อด้านล่างนี้ได้เลย";
+next;
+menu 
+"- Acolyte Set",set1,
+"- Archer Set",set2,
+"- Mage Set",set3,
+"- Merchent Set",set4,
+"- Sword Set",set5,
+"- Thief Set",set6,
+"Exit",cancel;
+
+
+
+set1:
+mes "^FF0000[ Card Set NPC ]^000000";
+mes "ท่านได้รับ Card Set แล้วค่ะ";
+getitem 4280,1;
+getitem 4285,1;
+getitem 4312,1;
+getitem 4217,1;
+getitem 4293,1;
+atcommand strcharinfo(0)+"@item 4280 1";
+atcommand strcharinfo(0)+"@item 4185 1";
+atcommand strcharinfo(0)+"@item 4312 1";
+atcommand strcharinfo(0)+"@item 4217 1";
+atcommand strcharinfo(0)+"@item 4293 1";
+close;
+
+set2:
+mes "^FF0000[ Card Set NPC ]^000000";
+mes "ท่านได้รับ Card Set แล้วค่ะ";
+getitem 4297,1;
+getitem 4234,1;
+getitem 4199,1;
+getitem 4178,1;
+getitem 4252,1;
+atcommand strcharinfo(0)+"@item 4297 1";
+atcommand strcharinfo(0)+"@item 4234 1";
+atcommand strcharinfo(0)+"@item 4199 1";
+atcommand strcharinfo(0)+"@item 4178 1";
+atcommand strcharinfo(0)+"@item 4252 1";
+close;
+
+set3:
+mes "^FF0000[ Card Set NPC ]^000000";
+mes "ท่านได้รับ Card Set แล้วค่ะ";
+getitem 4327,1;
+getitem 4309,1;
+getitem 4325,1;
+getitem 4208,1;
+getitem 4258,1;
+getitem 4191,1;
+atcommand strcharinfo(0)+"@item 4327 1";
+atcommand strcharinfo(0)+"@item 4309 1";
+atcommand strcharinfo(0)+"@item 4325 1";
+atcommand strcharinfo(0)+"@item 4208 1";
+atcommand strcharinfo(0)+"@item 4258 1";
+atcommand strcharinfo(0)+"@item 4191 1";
+close;
+
+set4:
+mes "^FF0000[ Card Set NPC ]^000000";
+mes "ท่านได้รับ Card Set แล้วค่ะ";
+getitem 4206,1;
+getitem 4281,1;
+getitem 4186,1;
+getitem 4321,1;
+getitem 4233,1;
+atcommand strcharinfo(0)+"@item 4206 1";
+atcommand strcharinfo(0)+"@item 4281 1";
+atcommand strcharinfo(0)+"@item 4186 1";
+atcommand strcharinfo(0)+"@item 4321 1";
+atcommand strcharinfo(0)+"@item 4233 1";
+close;
+
+set5:
+mes "^FF0000[ Card Set NPC ]^000000";
+mes "ท่านได้รับ Card Set แล้วค่ะ";
+getitem 4319,1;
+getitem 4331,1;
+getitem 4220,1;
+getitem 4311,1;
+getitem 4246,1;
+atcommand strcharinfo(0)+"@item 4319 1";
+atcommand strcharinfo(0)+"@item 4331 1";
+atcommand strcharinfo(0)+"@item 4220 1";
+atcommand strcharinfo(0)+"@item 4311 1";
+atcommand strcharinfo(0)+"@item 4246 1";
+close;
+
+set6:
+mes "^FF0000[ Card Set NPC ]^000000";
+mes "ท่านได้รับ Card Set แล้วค่ะ";
+getitem 4230,1;
+getitem 4210,1;
+getitem 4257,1;
+getitem 4172,1;
+getitem 4272,1;
+atcommand strcharinfo(0)+"@item 4230 1";
+atcommand strcharinfo(0)+"@item 4210 1";
+atcommand strcharinfo(0)+"@item 4257 1";
+atcommand strcharinfo(0)+"@item 4172 1";
+atcommand strcharinfo(0)+"@item 4272 1";
+close;
+
+
+
+cancel:
+mes "^FF0000[ Card Set NPC ]^000000";
+mes "แล้วพบกันใหม่";
+close;
+
+
+
+OnInit:
+Waitingroom "แจกเซ็ตการ์ดแต่ละอาชีพ",0;
+end;
+}

@@ -1,0 +1,31 @@
+//============================================================
+
+livion,168,120,3	script	เช่าทุกอย่าง	808,{
+	if (ismounting()) {
+		message strcharinfo(0),"ลงจากตัวที่เจ้าขี่ก่อนได้มั้ย";
+		close; }
+	else if ((eaclass()&EAJ_THIRDMASK==EAJ_RANGER) && !countitem(6124)) {
+		if (!checkfalcon() && getskilllv("HT_FALCON") && !checkoption(Option_Wug) && !checkoption(Option_Wugrider)) {
+			if(select(" ~ เหยี่ยว: ~ หมา")==1) setfalcon;
+			else getitem 6124,1; }
+		else getitem 6124,1; }
+	else if ((eaclass()&EAJ_THIRDMASK==EAJ_MECHANIC) && !checkcart() && getskilllv("MC_PUSHCART")) {
+		if (!checkmadogear() && getskilllv("NC_MADOLICENCE")) {
+			if(select(" รถเข็น: ~ หุ่นยนต์")==1) setcart;
+			else setmadogear; }
+		else setcart; }
+	else if (!checkcart() && getskilllv("MC_PUSHCART")) setcart;
+	else if (!checkfalcon() && getskilllv("HT_FALCON") && !checkoption(Option_Wug) && !checkoption(Option_Wugrider)) setfalcon;
+	else if (!checkriding() && getskilllv("KN_RIDING")) {
+		if (eaclass()&EAJ_THIRDMASK==EAJ_RUNE_KNIGHT) setdragon;
+		else setriding; }
+	else if (!checkmadogear() && getskilllv("NC_MADOLICENCE")) setmadogear;
+	else {
+		message strcharinfo(0),"ข้าว่าเจ้าต้องเช้าใจผิดแน่เลย";
+		close; }
+	specialeffect2 EF_TEIHIT3;
+	close;
+}
+
+
+//============================================================

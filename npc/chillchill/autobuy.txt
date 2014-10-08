@@ -1,0 +1,208 @@
+//=-=-=-=-=-=-=-= Script by ColoExpress =-=-=-=-=-=-=-=
+//=-=-=-=-=-=-=-= 2010 - 2011 Develop present =-=-=-=-=-=-=-=
+//=-=-=-=-=-=-=-= Powered By www.coloexpress.in.th =-=-=-=-=-=-=-=
+
+livion,33,238,5	script	Purchasing Team Mr. Huh	59,{
+	if (checkweight(1201,1) == 0) {
+		mes "- โปรดรอซักครู่ !! -";
+		mes "- ขณะนี้คุณแบกน้ำหนัก -";
+		mes "- มากเกินกว่าที่คุณจะรับได้. -";
+		mes "- โปรดลองใหม่อีกครั้ง -";
+		mes "- หลังจากคุณทำตัวเบาๆแล้ว. -";
+		close;
+	}
+	if (getskilllv(2535) > 0) {
+		mes "[Mr. Huh]";
+		mes "ข้ามีนามว่า Huh";
+		mes "มาจากทีมงานจัดจำหน่ายสินค้า";
+		mes "ท่านมีอะไรให้ข้ารับใช้??";
+		next;
+		if (select("ขอซื้อใบอนุญาติตั้งร้าน Buy Stall Permit:ยกเลิก") == 1) {
+			mes "[Mr. Huh]";
+			mes "ราคาใบละ 200 zeny นะ";
+			mes "คุณต้องการเท่าไร?";
+			mes "ใส่ '0' ถ้าคุณต้องการยกเลิก.";
+			next;
+			while(1) {
+				input .@input,0,51;
+				if (.@input == 0) {
+					mes "[Mr. Huh]";
+					mes "การจัดการถูกยกเลิก.";
+					mes "กลับมาอีกในครั้งต่อไป.";
+					close;
+				}
+				else if (.@input < 1 || .@input > 50) {
+					mes "[Mr. Huh]";
+					mes "จำนวนที่ใส่จะต้อง";
+					mes "ไม่เกิน 50.";
+					next;
+				}
+				else {
+					break;
+				}
+			}
+			set .@sell,.@input * 200;
+			set .@item_weight,.@input * 10;
+			if (Zeny < .@sell) {
+				mes "[Mr. Huh]";
+				mes "คุณมีเงินไม่พอที่จะซื้อ.";
+				mes "ตรวจสอบเงินของคุณอีกที";
+				close;
+			}
+			if ((MaxWeight - Weight) < .@item_weight) {
+				mes "[Mr. Huh]";
+				mes "กรุณาตรวจสอบ";
+				mes "พื้นที่ว่าง inventory ของคุณ.";
+				close;
+			}
+			set zeny,zeny-.@sell;
+			getitem 6377,.@input; //Buy_Stall_Permit
+			mes "[Mr. Huh]";
+			mes "ขอบคุณ.";
+			mes "แล้วพบกันใหม่.";
+			close;
+		}
+		mes "[Mr. Huh]";
+		mes "มาอีกครั้งเมื่อคุณจำเป็น";
+		mes "ต้องซื้อ Buy Stall Permit";
+		close;
+	} else {
+		mes "[Mr. Huh]";
+		mes "ท่านรู้หรือไม่?";
+		mes "สมาคมของเรากำลังพบปัญหาจากใบอนุญาติ";
+		mes "ส่วนบุคคลในการซื้อสินค้า";
+		next;
+		select("ข้าไม่เคยมีปัญหาในการซื้อสินค้าเลย...");
+		mes "[Mr. Huh]";
+		mes "....";
+		mes "....(Mr. Huh";
+		mes "....บรรยายรายละเอียดในส่วนต่างๆ)";
+		next;
+		select("ตกลง, จุดมุ่งหมายคืออะไร?");
+		mes "[Mr. Huh]";
+		mes "แน่นอน,";
+		mes "เราคิดค่าธรรมเนียมเพียงครั้งละ 10,000 zeny,";
+		mes "และท่านจะต้องมี ^FF0000Buy Stall Permit^000000 ทุกครั้งที่เปิดร้าน";
+		next;
+		mes "[Mr. Huh]";
+		mes "ที่กล่าวไป,";
+		mes "ท่านจะต้องสมัครตอนนี้เลยหรือเปล่า?";
+		mes "ถ้าท่านตกลง,";
+		mes "ข้าจะสอนท่านเกี่ยวกับ Buying Store ทันที";
+		next;
+		if (select("เรียนรู้การเปิดร้าน Buying Store:ยกเลิก") == 1) {
+			mes "[Mr. Huh]";
+			if (getskilllv("MC_VENDING") < 1) {
+				mes "คุณยังไม่มีทักษะ Vending มันเป็นสิ่งสำคัญสำหรับการ Buying Store!";
+				next;
+				mes "[Mr. Huh]";
+				mes "คุณต้องมีทักษะ Vending อย่างน้อย Lv.1";
+				close;
+			}
+			if (Zeny < 10000) {
+				mes "คุณมีเงินไม่พอสำหรับค่าธรรมเนียม";
+				next;
+				mes "[Mr. Huh]";
+				mes "คุณต้องมีเงิน อย่างน้อย 10,000 zeny";
+				close;
+			}
+			set zeny,zeny-10000;
+			mes "นับว่าท่านมีการตัดสินใจที่ดี,";
+			mes "ท่านชื่อ " + strcharinfo(0) + " ใช่ไหม?";
+			mes "ข้าจะลงทะเบียนให้เจ้าแล้วกัน...";
+			next;
+			getitem 6377,5;
+			skill 2535,2,0;
+			mes "[Mr. Huh]";
+			mes "ตอนนี้ท่านสามารถ";
+			mes "ใช้บริการ Buying Store ได้แล้ว";
+		} else {
+			mes "[Mr. Huh]";
+			mes "แล้วพบกันใหม่เมื่อท่านสนใจ";
+		}
+		close;
+	}
+end;
+}
+
+que_job01,68,84,8	script	Black Marketeer	881,{
+	if (checkweight(1201,1) == 0) {
+		mes "- โปรดรอซักครู่ !! -";
+		mes "- ขณะนี้คุณแบกน้ำหนัก -";
+		mes "- มากเกินกว่าที่คุณจะรับได้. -";
+		mes "- โปรดลองใหม่อีกครั้ง -";
+		mes "- หลังจากคุณทำตัวเบาๆแล้ว. -";
+		close;
+	}
+	mes "[Mr. Bong]";
+	mes "เจ้าคงต้องการบางสิ่งที่ไม่ใช่เรื่องดีนัก";
+	mes "ที่เจ้ามาพบข้า เจ้าต้องการอะไร??";
+	next;
+	switch (select("Buy Shabby Stall Permit:ท่านคือใคร:ไม่มีอะไร"))
+	{
+	case 1:
+		mes "[Mr. Bong]";
+		mes "ราคาใบละ 500 zeny นะ";
+		mes "คุณต้องการเท่าไร?";
+		mes "ใส่ '0' ถ้าคุณต้องการยกเลิก.";
+		next;
+		while(1) {
+			input .@input,0,11;
+			if (.@input == 0) {
+				mes "[Mr. Bong]";
+				mes "การจัดการถูกยกเลิก.";
+				mes "กลับมาอีกในครั้งต่อไป.";
+				close;
+				}
+			else if (.@input < 1 || .@input > 10) {
+				mes "[Mr. Bong]";
+				mes "คุณซื้อได้ครั้งละไม่เกิน 10 ชิ้น";
+				next;
+			}
+			else {
+				break;
+			}
+		}
+		set .@sell,.@input * 500;
+		set .@item_weight,.@input * 10;
+		if (Zeny < .@sell) {
+			mes "[Mr. Bong]";
+			mes "คุณมีเงินไม่พอที่จะซื้อ.";
+			mes "ตรวจสอบเงินของคุณอีกที";
+			close;
+		}
+		if ((MaxWeight - Weight) < .@item_weight) {
+			mes "[Mr. Bong]";
+			mes "กรุณาตรวจสอบ";
+			mes "พื้นที่ว่าง inventory ของคุณ.";
+			close;
+		}
+		set zeny,zeny-.@sell;
+		getitem 12548,.@input; //Buy_Shabby_Stall_Permit
+		mes "[Mr. Huh]";
+		mes "ขอบคุณสำหรับ "+.@sell+" zeny";
+		mes "ฮ่า...ฮ่า ฮ่า ฮ่า!";
+		mes "ข้าจะยึดธุรกิจของ Mr. Huh ซะ";
+		mes "แล้วคอยดู! *หุ หุ*";
+		close;
+
+	case 2:
+		mes "[Mr. Bong]";
+		mes "ข้าคือ Mr. Bong";
+		mes "ทีมงานจัดจำหน่ายสินค้า";
+		mes "เจ้าไม่รู้จักข้าก็จงออกไปซะ";
+		close2;
+		warp "morocc",45,105;
+		break;
+
+	case 3:
+		mes "[Mr. Bong]";
+		mes "ถ้าไม่มีอะไร";
+		mes "ข้าขอส่งแขกเลยแล้วกัน";
+		mes "ข้ามีงานต้องทำอีกเยอะ";
+		close2;
+		warp "morocc",45,105;
+		break;
+	}
+end;
+}

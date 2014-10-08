@@ -1,0 +1,187 @@
+//============================================================
+
+Hyrule,152,214,4	script	เปลี่ยนอาชีพ#1	73,{
+
+function Job_Menu; function A_An;
+
+	mes "[Job Master]";
+	if (Class > 4049) {
+		mes "ไม่มีอาชีพอื่น ๆ ที่สูงกว่านี้แล้ว";
+		close;
+	}
+	if (checkfalcon() || checkcart() || checkriding() || ismounting()) {
+		mes "โปรดถอด "+((checkfalcon())?"falcon":"")+((checkcart())?"cart":"")+((checkriding())?"Peco":"")+((ismounting())?"mount":"")+" ก่อนที่จะเปลี่ยนอาชีพ";
+		close;
+	}
+	if (.SkillPointCheck && SkillPoint) {
+		mes "ดูเหมือนว่าเจ้ายังอัพสกิลไม่ครบนะ";
+		close;
+	}
+
+	set .@eac, eaclass();
+	set .@i, ((.ThirdClass)?roclass(.@eac&EAJ_UPPERMASK):Class);
+	if (.@i > 6 && .@i < 22) {
+		if (BaseLevel < .Rebirth[0] || JobLevel < .Rebirth[1]) {
+			set .@blvl, .Rebirth[0]-BaseLevel; set .@jlvl, .Rebirth[1]-JobLevel;
+			mes "เจ้าต้องมีเลเวล "+((.@blvl>0)?.@blvl+" ขึ้นไป และจ๊อบเลเวล "+((.@jlvl>0)?"/ ":""):"")+((.@jlvl>0)?.@jlvl+" ขึ้นไป ":"")+"แล้วค่อยมาหาข้าใหม่";
+			close;
+		}
+		if (Class > 21) {
+			mes "ยินดีด้วยนะ";
+			mes "เจ้ามาถึงขั้นสูงสุด";
+			mes "ของสายอาชีพของเจ้าแล้ว";
+			mes "เจ้าพร้อมหรือยังล่ะ ";
+			next;
+			Job_Menu(roclass(.@eac|EAJL_THIRD));
+			close;
+		}
+		while(1) {
+			mes "เอาล่ะ";
+			mes "ตอนนี้เจ้ามาถึง";
+			mes "ขีดสุดของสายอาชีพแล้ว";
+			mes "ข้ามีทางเลือกให้เจ้า";
+			mes "เจ้าจะเลือกอะไรล่ะ";
+			next;
+			set .@i, select(" ~ ^0055FFRebirth^000000:"+((.ThirdClass)?" ~ ^FF0000เปลี่ยนคลาส 3^000000":"")+": ~ ^777777ไม่มีอะไรหรอก^000000");
+			if (.@i==3) close;
+			mes "[Job Master]";
+			mes "เจ้าแน่ใจแล้วนะ ?";
+			next;
+			Job_Menu(((.@i==1)?4001:roclass(.@eac|EAJL_THIRD)));
+			mes "[Job Master]";
+		}
+	}
+	set .@j1, roclass(.@eac|EAJL_2_1); set .@j2,roclass(.@eac|EAJL_2_2);
+	if ((.@eac&EAJ_UPPERMASK) == EAJ_SUPER_NOVICE) setarray .@exp[0],roclass(.@eac|EAJL_THIRD),99;
+	if (Class == Job_Ninja) setarray .@exp[0],.@j1,70;
+	if (.@exp[0] && .ThirdClass) {
+		if (BaseLevel < .Rebirth[0] || JobLevel < .@exp[1]) {
+			set .@blvl, .Rebirth[0]-BaseLevel; set .@jlvl, .@exp[1]-JobLevel;
+			mes "You need "+((.@blvl>0)?.@blvl+" more base levels "+((.@jlvl>0)?"/ ":""):"")+((.@jlvl>0)?.@jlvl+" more job levels ":"")+"to continue.";
+			close;
+		}
+		mes "เปลี่ยนอาชีพ"+jobname(.@exp[0])+" ?";
+		next;
+		Job_Menu(.@exp[0]);
+		close;
+	}
+	if (.@eac&EAJL_2)
+		if (.@eac&(EAJL_UPPER|EAJL_BABY) || roclass(.@eac|EAJL_UPPER) == -1) {
+			mes "ไม่มีอาชีพที่สูงกว่านี้แล้ว";
+			close;
+		}
+	if ((.@eac&EAJ_BASEMASK) == EAJ_NOVICE) {
+		if (JobLevel < .JobReq[0])
+			mes "เจ้าต้องมีจ๊อบเลเวล "+.JobReq[0]+" ก่อนถึงจะเปลี่ยนอาชีพได้";
+		else if (Class == 4001 && .LastJob && lastJob) {
+			mes "เจอกันอีกแล้วนะ";
+			mes "เจ้าจะเปลี่ยนอาชีพเลยไหมล่ะ ?";
+			next;
+			Job_Menu(roclass((eaclass(lastJob)&EAJ_BASEMASK)|EAJL_UPPER));
+		} else switch(Class) {
+			case 0: Job_Menu(1,2,3,4,5,6,23,4046,24,25,4023);
+			case 4001: Job_Menu(4002,4003,4004,4005,4006,4007);
+			case 4023: Job_Menu(4024,4025,4026,4027,4028,4029,4045);
+			default: mes "An error has occurred."; break;
+		}
+		close;
+	}
+	if (roclass(.@eac|EAJL_2_1) == -1 || roclass(.@eac|EAJL_2_2) == -1)
+		mes "No more jobs are available.";
+	else if (!(.@eac&EAJL_2) && JobLevel < .JobReq[1])
+		mes "เจ้าต้องมีจ๊อบเลเวล "+.JobReq[1]+" ขึ้นไปถึงจะเปลี่ยนคลาสต่อไปได้";
+	else if (.LastJob && lastJob && (.@eac&EAJL_UPPER)) {
+		mes "เอาล่ะ ตอนนี้เจ้ากำลัง";
+		mes "จะเป็น Hi-Class แล้ว";
+		mes "พร้อมหรือยังล่ะ";
+		next;
+		Job_Menu(lastJob+4001);
+	} else
+		Job_Menu(.@j1,.@j2);
+	close;
+
+function Job_Menu {
+	while(1) {
+		if (getargcount() > 1) {
+			mes "เจ้าอยากจะเป็นอะไรล่ะ.";
+			set .@menu$,"";
+			for(set .@i,0; .@i<getargcount(); set .@i,.@i+1)
+				set .@menu$, .@menu$+" ~ "+jobname(getarg(.@i))+":";
+			set .@menu$, .@menu$+" ~ ^777777Cancel^000000";
+			next;
+			set .@i, getarg(select(.@menu$)-1,0);
+			if (!.@i) close;
+			if ((.@i == 23 || .@i == 4045) && BaseLevel < .SNovice) {
+				mes "[Job Master]";
+				mes "เจ้าต้องมีเลเวล"+.SNovice+" ขึ้นไปเสียก่อนจึงจะเปลี่ยนเป็น "+jobname(.@i)+".";
+				close;
+			}
+			mes "[Job Master]";
+			mes "แน่ใจแล้วนะ ?";
+			next;
+		} else
+			set .@i, getarg(0);
+		if (select(" ~ แน่นอน ข้ารอวันนี้มานานแล้ว : ~ ^777777"+((getargcount() > 1)?"ข้าเริ่มไม่แน่ใจตัวเองแล้วสิ":"ยกเลิก")+"^000000") == 1) {
+			mes "[Job Master]";
+			mes "จัดให้แล้วตามคำขอ";
+			if (.@i==4001 && .LastJob) set lastJob, Class;
+			jobchange .@i;
+			if (.@i==4001 || .@i==4023) resetlvl(1);
+			specialeffect2 338; specialeffect2 432;
+			if (.Platinum) callsub Get_Platinum;
+			close;
+		}
+		if (getargcount() == 1) return;
+		mes "[Job Master]";
+	}
+	end;
+}
+
+function A_An {
+	setarray .@A$[0],"a","e","i","o","u";
+	set .@B$, "_"+getarg(0);
+	for(set .@i,0; .@i<5; set .@i,.@i+1)
+		if (compare(.@B$,"_"+.@A$[.@i])) return "an "+getarg(0);
+	return "a "+getarg(0);
+}
+
+Get_Platinum:
+	skill 142,1,0;
+	switch(BaseClass) {
+		case 0: if (Class !=23) skill 143,1,0; break;
+		case 1: skill 144,1,0; skill 145,1,0; skill 146,1,0; break;
+		case 2: skill 157,1,0; break;
+		case 3: skill 147,1,0; skill 148,1,0; break;
+		case 4: skill 156,1,0; break;
+		case 5: skill 153,1,0; skill 154,1,0; skill 155,1,0; break;
+		case 6: skill 149,1,0; skill 150,1,0; skill 151,1,0; skill 152,1,0; break;
+		default: break;
+	}
+	switch(BaseJob) {
+		case 7: skill 1001,1,0; break;
+		case 8: skill 1014,1,0; break;
+		case 9: skill 1006,1,0; break;
+		case 10: skill 1012,1,0; skill 1013,1,0; break;
+		case 11: skill 1009,1,0; break;
+		case 12: skill 1003,1,0; skill 1004,1,0; break;
+		case 14: skill 1002,1,0; break;
+		case 15: skill 1015,1,0; skill 1016,1,0; break;
+		case 16: skill 1007,1,0; skill 1008,1,0; skill 1017,1,0; skill 1018,1,0; skill 1019,1,0; break;
+		case 17: skill 1005,1,0; break;
+		case 18: skill 238,1,0; break;
+		case 19: skill 1010,1,0; break;
+		case 20: skill 1011,1,0; break;
+		default: break;
+	}
+	return;
+
+OnInit:
+	setarray .Rebirth[0],99,50;	// Minimum base level, job level to rebirth OR change to third class
+	setarray .JobReq[0],10,40;	// Minimum job level to turn into 1st class, 2nd class
+	set .ThirdClass,1;		// Enable third classes? (1: yes / 0: no)
+	set .SNovice,45;		// Minimum base level to turn into Super Novice
+	set .LastJob,1;			// Enforce linear class changes? (1: yes / 0: no)
+	set .SkillPointCheck,1;		// Force player to use up all skill points? (1: yes / 0: no)
+	set .Platinum,1;		// Get platinum skills automatically? (1: yes / 0: no)
+	end;
+}

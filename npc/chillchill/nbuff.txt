@@ -1,0 +1,85 @@
+neko_isle,79,145,5	script	ทหารยาม #h111 	763,6,6,{
+	waitingroom ">>ยินดีต้อนรับจ๊ะ<<",0;
+	mes "[พนักงานต้อนรับ]";
+	mes "..ยินดีต้อนรับสมาชิกใหม่ทุกท่าน..";
+	mes "ถ้าต้องการความช่วยเหลือ";
+	mes "ให้ท่านรีบกลับมาหาเรา";
+	mes "ได้ทุกเวลานะจ๊ะ";
+	close;
+	end;
+	
+OnTouch:
+	
+	if (getbrokenid(1) > 0) {
+		atcommand "@repairall";
+	}
+
+	percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Freeze;
+	sc_end SC_Sleep;
+	sc_end SC_Stan;
+	sc_end SC_Stone;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Bleeding;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+	sc_end SC_ORCISH;
+	sc_start SC_EXPBOOST,900000,100;
+	sc_start SC_BLESSING,900000,10;
+	sc_start SC_INCREASEAGI,900000,10;
+	sc_start SC_STRFood,900000,1;
+	sc_start SC_AGIFood,900000,1;
+	sc_start SC_VITFood,900000,1;
+	sc_start SC_DEXFood,900000,1;
+	sc_start SC_INTFood,900000,1;
+	sc_start SC_LUKFood,900000,1;
+	specialeffect2 582;
+	end;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+neko_isle,87,145,3	script	ทหารยาม#h111	762,6,6,{
+	waitingroom ">>ยินดีต้อนรับ<<",0;
+	mes "[พนักงานต้อนรับ]";
+	mes "..ยินดีต้อนรับสมาชิกใหม่ทุกท่าน..";
+	mes "ถ้าต้องการความช่วยเหลือ";
+	mes "ให้ท่านรีบกลับมาหาเรา";
+	mes "ได้ทุกเวลานะจ๊ะ";
+	close;
+	end;
+
+OnTouch:
+
+	if (getbrokenid(1) > 0) {
+		atcommand "@repairall";
+	}
+
+	percentheal 100,100;
+	sc_end SC_Poison;
+	sc_end SC_Freeze;
+	sc_end SC_Sleep;
+	sc_end SC_Stan;
+	sc_end SC_Stone;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Bleeding;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+	sc_end SC_ORCISH;
+	sc_start SC_EXPBOOST,900000,100;
+	sc_start SC_BLESSING,900000,10;
+	sc_start SC_INCREASEAGI,900000,10;
+	sc_start SC_STRFood,900000,1;
+	sc_start SC_AGIFood,900000,1;
+	sc_start SC_VITFood,900000,1;
+	sc_start SC_DEXFood,900000,1;
+	sc_start SC_INTFood,900000,1;
+	sc_start SC_LUKFood,900000,1;
+	specialeffect2 582;
+	end;
+}

@@ -1,0 +1,40 @@
+//===== rAthena Script =======================================
+//= Jail Monster Spawn Script
+//===== By: ==================================================
+//= Masao
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Spawns monsters in Jail.
+//============================================================
+
+neko_isle,78,134,20,20	monster	Basu		3000,5,0,0,0
+neko_isle,69,123,20,20	monster	Cerutim		3001,5,0,0,0
+neko_isle,78,112,15,15	monster	Cyain		3002,5,0,0,0
+neko_isle,95,108,10,10	monster	Dyeloailuan	3003,5,0,0,0
+neko_isle,89,96,10,10	monster	Ebodinvar	3004,5,0,0,0
+neko_isle,102,104,30,30	monster	Eloer		3005,5,0,0,0
+neko_isle,96,94,20,20	monster	Erishn		3006,5,0,0,0
+neko_isle,115,113,20,20	monster	Falmanetalel	3007,5,0,0,0
+neko_isle,127,119,15,15	monster	Fiol		3008,5,0,0,0
+neko_isle,111,125,10,10	monster	Flulwinpy	3009,5,0,0,0
+neko_isle,106,138,10,10	monster	Foges		3010,5,0,0,0
+neko_isle,97,140,30,30	monster	Gyylgish	3011,2,0,0,0
+neko_isle,88,141,20,20	monster	Halozrar	3012,5,0,0,0
+neko_isle,81,137,20,20	monster	Isoar		3013,5,0,0,0
+neko_isle,72,126,15,15	monster	Lahkkag		3014,5,0,0,0
+neko_isle,91,124,10,10	monster	Lucuryam	3015,5,0,0,0
+neko_isle,88,90,10,10	monster	Machoallol	3016,5,0,0,0
+neko_isle,88,133,30,30	monster	Moam		3017,5,0,0,0
+neko_isle,82,125,20,20	monster	Mogocam		3018,5,0,0,0
+neko_isle,102,112,20,20	monster	Otuer		3019,5,0,0,0
+neko_isle,114,113,15,15	monster	Paetramid	3020,5,0,0,0
+neko_isle,120,112,10,10	monster	Rucon		3021,5,0,0,0
+neko_isle,129,123,10,10	monster	Sasyl		3022,5,0,0,0
+neko_isle,116,128,30,30	monster	Seriadam	3023,5,0,0,0
+neko_isle,106,138,30,30	monster	Sullin		3024,5,0,0,0
+//neko_isle,98,140,30,30	monster	Tial		3026,1,0,0,0
+neko_isle,89,142,30,30	monster	Vhrinko		3027,5,0,0,0
+neko_isle,65,87,30,30	monster	king_poring	3028,1,0,0,0
